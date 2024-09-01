@@ -1,0 +1,25 @@
+service: my-service # Nome do seu serviço
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-1
+
+plugins:
+  - serverless-plugin-typescript
+
+functions:
+  hello:
+    handler: src/handler.hello
+    events:
+      - http:
+          path: hello
+          method: get
+
+package:
+  individually: true
+
+custom:
+  webpack:
+    webpackConfig: './webpack.config.js'
+    includeModules: true
